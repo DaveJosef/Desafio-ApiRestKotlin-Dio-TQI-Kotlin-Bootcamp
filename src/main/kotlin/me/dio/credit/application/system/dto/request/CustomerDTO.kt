@@ -29,8 +29,8 @@ class CustomerDTO(
         email = this.email,
         password = this.firstName,
         address = Address(
-            this.zipCode,
-            this.street
+            zipCode = this.zipCode,
+            street = this.street
         )
     )
 }
