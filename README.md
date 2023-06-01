@@ -27,7 +27,7 @@ Api desenvolvida em Kotlin 💜 e Spring Boot 🍃 testada e documentada com Swa
 <br />
 Este projeto foi feito com a mentoria de [Camila da DIO](https://github.com/cami-la) e a sua versão do projeto é [essa](https://github.com/cami-la/credit-application-system)
 
-## Documentação
+## 📃 Documentação
 A Api está documentada com Swagger. Para acessar, a URL é ```localhost://8080/swagger-ui.html```
 <br />
 O seguinte vídeo apresenta a interface da documentação:
@@ -38,7 +38,7 @@ O seguinte vídeo apresenta a interface da documentação:
   </a>
 </div>
 
-## TDD
+## ⚙ TDD
 A Api também está testada utilizando, inclusive, o [MockK](https://mockk.io/), que é uma biblioteca de testes para Kotlin. Veja um video demonstrando a Cobertura de Testes da Api.
 
 <div align="center">
@@ -47,7 +47,7 @@ A Api também está testada utilizando, inclusive, o [MockK](https://mockk.io/),
   </a>
 </div>
 
-## Spring Hateoas
+## 🔗 Spring Hateoas
 Na minha contribuição, eu implementei os testes de CreditsResource. Mas fui além, ao elevar o nível de maturidade da Api na escala de Richardson utilizando o Spring Hateoas.
 <br />
 Na imagem abaixo, é possível visualizar que o resultado contém links para outras Requests, característica principal de uma Api Hateoas.
