@@ -6,6 +6,9 @@ import me.dio.credit.application.system.dto.request.CustomerUpdateDTO
 import me.dio.credit.application.system.dto.response.CustomerView
 import me.dio.credit.application.system.entity.Customer
 import me.dio.credit.application.system.service.impl.CustomerService
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
+import org.springframework.hateoas.server.mvc.linkTo
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -28,16 +31,27 @@ class CustomerResource (
         @PostMapping
         fun saveCustomer(@RequestBody @Valid customerDTO: CustomerDTO): ResponseEntity<CustomerView> {
             val savedCustomer = this.customerService.save(customerDTO.toEntity());
-            return ResponseEntity.status(HttpStatus.CREATED).body(CustomerView(savedCustomer))
+            val hateoasResponse: CustomerView = CustomerView(savedCustomer)
+            hateoasResponse.add(linkTo<CustomerResource> { methodOn(CustomerResource::class.java).findById(savedCustomer.id!!) }.withRel("Find Customer by Id"))
+            hateoasResponse.add(linkTo<CustomerResource> { methodOn(CustomerResource::class.java).updateCustomer(savedCustomer.id!!, CustomerUpdateDTO(
+                firstName = savedCustomer.firstName,
+                lastName = savedCustomer.lastName,
+                income = savedCustomer.income,
+                zipCode = savedCustomer.address.zipCode,
+                street = savedCustomer.address.street))
+            }.withRel("Update Customer"))
+            return ResponseEntity.status(HttpStatus.CREATED).body(hateoasResponse)
         }
 
         @GetMapping("/{id}")
         fun findById(@PathVariable id: Long): ResponseEntity<CustomerView> {
             val customer: Customer = this.customerService.findById(id)
-            return ResponseEntity.status(HttpStatus.OK).body(CustomerView(customer))
+            val hateoasResponse: CustomerView = CustomerView(customer)
+            hateoasResponse.add(linkTo<CustomerResource> { methodOn(CustomerResource::class.java).findById(id) }.withSelfRel())
+            return ResponseEntity.status(HttpStatus.OK).body(hateoasResponse)
         }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+        @ResponseStatus(HttpStatus.NO_CONTENT)
         @DeleteMapping("/{id}")
         fun delete(@PathVariable id: Long) = this.customerService.delete(id)
 
@@ -49,6 +63,9 @@ class CustomerResource (
             val customer: Customer = this.customerService.findById(id);
             val customerToUpdate: Customer = customerUpdateDTO.toEntity(customer)
             val customerUpdated: Customer = this.customerService.save(customerToUpdate)
-            return ResponseEntity.status(HttpStatus.OK).body(CustomerView(customerUpdated))
+            val hateoasResponse: CustomerView = CustomerView(customerUpdated)
+            hateoasResponse.add(linkTo<CustomerResource> { methodOn(CustomerResource::class.java).updateCustomer(id, customerUpdateDTO) }.withSelfRel())
+            hateoasResponse.add(linkTo<CustomerResource> { methodOn(CustomerResource::class.java).findById(id) }.withRel("Find Customer by Id"))
+            return ResponseEntity.status(HttpStatus.OK).body(hateoasResponse)
         }
 }

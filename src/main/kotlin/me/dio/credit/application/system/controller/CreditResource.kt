@@ -6,6 +6,8 @@ import me.dio.credit.application.system.dto.response.CreditView
 import me.dio.credit.application.system.dto.response.CreditViewList
 import me.dio.credit.application.system.entity.Credit
 import me.dio.credit.application.system.service.impl.CreditService
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
+import org.springframework.hateoas.server.mvc.linkTo
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -36,6 +38,8 @@ class CreditResource(
         val creditViewList: List<CreditViewList> = this.creditService.findAllByCustomer(customerId)
             .stream()
             .map { credit: Credit -> CreditViewList(credit) }
+            .map { creditViewList: CreditViewList -> creditViewList.add(linkTo<CreditResource> { methodOn(CreditResource::class.java).findAllByCustomerId(customerId) }.withSelfRel()) }
+            .map { creditViewList: CreditViewList -> creditViewList.add(linkTo<CreditResource> { methodOn(CreditResource::class.java).findByCreditCode(customerId, creditViewList.creditCode) }.withRel("Find Credit by creditCode")) }
             .collect(Collectors.toList())
         return ResponseEntity.status(HttpStatus.OK).body(creditViewList)
     }
@@ -46,6 +50,9 @@ class CreditResource(
         @PathVariable creditCode: UUID
     ): ResponseEntity<CreditView> {
         val credit: Credit = this.creditService.findByCreditCode(customerId, creditCode)
-        return ResponseEntity.status(HttpStatus.OK).body(CreditView(credit))
+        val hateoasResponse: CreditView = CreditView(credit)
+        hateoasResponse.add(linkTo<CreditResource> { methodOn(CreditResource::class.java).findByCreditCode(customerId, creditCode) }.withSelfRel())
+        hateoasResponse.add(linkTo<CreditResource> { methodOn(CreditResource::class.java).findAllByCustomerId(customerId) }.withRel("Find All by customerId"))
+        return ResponseEntity.status(HttpStatus.OK).body(hateoasResponse)
     }
 }

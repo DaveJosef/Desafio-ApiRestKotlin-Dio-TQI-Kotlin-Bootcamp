@@ -1,6 +1,7 @@
 package me.dio.credit.application.system.dto.response
 
 import me.dio.credit.application.system.entity.Customer
+import org.springframework.hateoas.RepresentationModel
 import java.math.BigDecimal
 
 class CustomerView(
@@ -12,7 +13,7 @@ class CustomerView(
     val zipCode: String,
     val street: String,
     val id: Long?
-) {
+) : RepresentationModel<CustomerView>() {
 
     constructor(customer: Customer): this(
         firstName = customer.firstName,
