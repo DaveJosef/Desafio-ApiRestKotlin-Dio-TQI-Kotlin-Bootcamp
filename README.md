@@ -44,7 +44,7 @@ Além da documentação do Swagger, também disponibilizei um arquivo com uma [c
 A Api também está testada utilizando, inclusive, o [MockK](https://mockk.io/), que é uma biblioteca de testes para Kotlin. Veja um video demonstrando a Cobertura de Testes da Api.
 
 <div align="center">
-  <a alt="Video demonstração de testes do projeto" href="https://drive.google.com/file/d/1Ha2QERAK6wrDT3ovpsida3h_hJ9hZoPO/view?usp=sharing">
+  <a alt="Video demonstração de testes do projeto" href="https://drive.google.com/file/d/1m_32hJDIh9w6S9S9cuhAVGLJWjNDT91v/view?usp=sharing">
     <img width="60%" src="https://res.cloudinary.com/dloygzh7o/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1685577428/tests_kotlin_play_dhc7da.jpg?_s=public-apps" />
   </a>
 </div>
