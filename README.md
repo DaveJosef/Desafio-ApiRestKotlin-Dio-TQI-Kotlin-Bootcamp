@@ -25,10 +25,10 @@ Api desenvolvida em Kotlin 💜 e Spring Boot 🍃 testada e documentada com Swa
 <br />
 [en-US] Tested and Swagger-documented Api made in Kotlin and Spring Boot. Project of the Bootcamp Kotlin backend Developer on Dio.
 <br />
-Este projeto foi feito com a mentoria de [Camila da DIO](https://github.com/cami-la) e a sua versão do projeto é [essa](https://github.com/cami-la/credit-application-system)
+Este projeto foi feito com a mentoria de [Camila da DIO](https://github.com/cami-la) e o projeto base é [esse](https://github.com/cami-la/credit-application-system).
 
 ## 📃 Documentação
-A Api está documentada com Swagger. Para acessar, a URL é ```localhost://8080/swagger-ui.html```
+A Api está documentada com Swagger. Para acessar, a URL é ```http://localhost:8080/swagger-ui.html```
 <br />
 O seguinte vídeo apresenta a interface da documentação:
 
