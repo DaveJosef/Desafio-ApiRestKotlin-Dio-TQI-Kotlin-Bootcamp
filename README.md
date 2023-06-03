@@ -38,6 +38,8 @@ O seguinte vídeo apresenta a interface da documentação:
   </a>
 </div>
 
+Além da documentação do Swagger, também disponibilizei um arquivo com uma [coleção de requisições de teste do Insomnia](https://github.com/DaveJosef/Desafio-ApiRestKotlin-Dio-TQI-Kotlin-Bootcamp/blob/master/credit-app-system-reqs). Sinta-se livre para usá-lo caso seja familiar ao Insomnia.
+
 ## ⚙ TDD
 A Api também está testada utilizando, inclusive, o [MockK](https://mockk.io/), que é uma biblioteca de testes para Kotlin. Veja um video demonstrando a Cobertura de Testes da Api.
 
